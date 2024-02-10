@@ -32,7 +32,22 @@ public:
         std::cout << "Мест в плацкарте: " << plackartCount << std::endl;
 
     }
+
+    std::string getDestination() {
+        return this->destination;
+    }
 };
+
+void inputDataTrain(std::string destination, int number, int time, int mainCount, int kupeCount, int plackartCount) { // хотел сделать функцию для записи данных под новый объект класса
+    cout << "Введите данные о поезде!\n"; 
+    cout << "Пункт назначения: ";     cin >> destination;
+    cout << "Номер: ";    cin >> number;
+    cout << "Время: ";  cin >> time;
+    cout << "Общее количество мест: ";    cin >> mainCount;
+    cout << "Мест в купе: ";  cin >> kupeCount;
+    cout << "Мест в плацкарте: ";  cin >> plackartCount;
+}
+
 
 int main()
 {
@@ -46,8 +61,9 @@ int main()
     int mainCount; 
     int kupeCount;
     int plackartCount;
-
-    std::vector<Train> v1; // массив поездов
+    std::string name;
+    
+    vector<Train> v1; // массив поездов
 
     cout << "Введите данные о поезде!\n";
     cout << "Пункт назначения: ";     cin >> destination;
@@ -57,13 +73,39 @@ int main()
     cout << "Мест в купе: ";  cin >> kupeCount;
     cout << "Мест в плацкарте: ";  cin >> plackartCount;
 
+    std::cout << endl;
+
+    cout << "Введите искомый пункт значения: "; cin >> name;
+
     Train t1;
     t1.setTrain(destination, number, time, mainCount, kupeCount, plackartCount);
-    t1.show();
+    Train t2;
+    t2.setTrain(destination, number, time, mainCount, kupeCount, plackartCount);
+    Train t3;
+    t3.setTrain(destination, number, time, mainCount, kupeCount, plackartCount);
 
     v1.push_back(t1);
-    //getline(std::cin, name);
-    //std::cout << name << std::endl;
+    v1.push_back(t2);
+    v1.push_back(t3);
+
+    std::cout << endl;
+    std::cout << "Походящие поезда: ";
+    std::cout << v1.size() << endl;
+    std::cout << endl;
+
+    for (int i = 0; i < v1.size(); i++) {
+        std::cout << i+1 << " поезд";
+        if (v1[i].getDestination() == name) {
+            v1[i].show();
+            std::cout << endl;
+
+        }
+    }
+
+
+
+    std::cout << "Размер массива: " << v1.size();
+    
 
 }
 
