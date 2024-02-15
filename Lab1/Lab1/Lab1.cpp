@@ -6,10 +6,10 @@ using namespace std;
 
 class Train {
 private:
-    string destination; // пункт назначения
-    int number; // номер
+    string destination;
+    int number; 
     int time;
-    int mainCount; // количество мест
+    int mainCount; 
     int kupeCount;
     int plackartCount;
 public:
@@ -23,23 +23,19 @@ public:
         this->plackartCount = plackartCount;
     }
 
-    Train()
+    Train(const Train& t)
     {
-
+        this->destination = t.destination;
+        this->number = t.number;
+        this->time = t.time;
+        this->mainCount = t.mainCount;
+        this->kupeCount = t.kupeCount;
+        this->plackartCount = t.plackartCount;
     }
 
     ~Train()
     {
         
-    }
-
-    void setTrain(string destination, int number, int time, int mainCount, int kupeCount, int plackartCount) {
-        this->destination = destination;
-        this->number = number;
-        this->time = time;
-        this->mainCount = mainCount;
-        this->kupeCount = kupeCount;
-        this->plackartCount = plackartCount;
     }
 
     void show() {
@@ -57,18 +53,71 @@ public:
     int getTime() { return time; }
     int getMainCount() { return mainCount; }
     int getNumber() { return number; }
+    int getKupeCount() { return kupeCount; }
+    int getPupeCount() { return plackartCount; }
+
+
+    string setDestination(string destination) { 
+        this->destination = destination;
+    }
+    int setTime(int time) { 
+        this->time = time;
+    }
+    int setMainCount(int mainCount) { 
+        this->mainCount = mainCount;
+    }
+    int setNumber(int number) { 
+        this->number = number;
+    }
+    int setKupeCount(int kupeCount) { 
+        this->kupeCount = kupeCount;
+    }
+    int setPupeCount(int plackartCount) { 
+        this->plackartCount = plackartCount;
+    }
 };
 
-void inputDataTrain(string destination, int number, int time, int mainCount, int kupeCount, int plackartCount) { // хотел сделать функцию для записи данных под новый объект класса
-    cout << "Введите данные о поезде!\n";
-    cout << "Пункт назначения: ";     cin >> destination;
-    cout << "Номер: ";    cin >> number;
-    cout << "Время: ";  cin >> time;
-    cout << "Общее количество мест: ";    cin >> mainCount;
-    cout << "Мест в купе: ";  cin >> kupeCount;
-    cout << "Мест в плацкарте: ";  cin >> plackartCount;
-}
+class Time {
+private:
+    int hours;
+    int minutes;
+    int seconds;
+public:
+    Time(int hour, int minute, int second) {
+        this->hours = hour;
+        this->minutes = minute;
+        this->seconds = second;
+    }
 
+    Time(const Time& t)
+    {
+        this->hours = t.hours;
+        this->minutes = t.minutes;
+        this->seconds = t.seconds;
+    }
+
+    ~Time()
+    {
+
+    }
+
+    int getHour() { return this->hours; }
+    int getMinute() { return this->minutes; }
+    int getSecond() { return this->seconds; }
+
+
+    int setHour(int hour) {
+        this->hours = hour;
+    }
+
+    int setMinute(int minute) {
+        this->minutes = minute;
+    }
+
+    int setSecond(int second) {
+        this->seconds = second;
+    }
+};
 
 int main()
 {
@@ -98,14 +147,6 @@ int main()
         cout << endl;
 
         Train t{ destination, number, time, mainCount, kupeCount, plackartCount };
-        /*Train t;
-        t.setTrain(destination, number, time, mainCount, kupeCount, plackartCount);*/
-        /*if (i > 1)
-        {
-            Train train{ t };
-            v1.push_back(train);
-            continue;
-        }*/
         v1.push_back(t);
     }
 
