@@ -150,6 +150,10 @@ int main()
         v1.push_back(t);
     }
 
+    Train t = Train(v1[0]);
+
+    v1.push_back(t);
+
 
      cout << "Введите искомый пункт назначения: "; cin >> destination;
      cout << "Введите время: "; cin >> time;
