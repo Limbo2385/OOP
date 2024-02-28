@@ -150,7 +150,7 @@ int main()
         v1.push_back(t);
     }
 
-    Train t = Train(v1[0]);
+    Train t(v1[0]);
 
     v1.push_back(t);
 

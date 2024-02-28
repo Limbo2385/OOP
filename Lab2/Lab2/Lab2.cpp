@@ -39,6 +39,7 @@ public:
 
     }
 
+
     bool operator == (const Train& train) const {
         return mainCount == train.mainCount;
     }
@@ -115,7 +116,14 @@ public:
         cout << "Номер: " << number << endl;
         cout << "Общее количество мест: " << mainCount << endl;
     }
+
+
+    void GetInfo(const Train&);
 };
+
+void Observer::GetInfo(const Train &trainer) {
+    cout << "Номер" << trainer.number;
+}
 
 
 
