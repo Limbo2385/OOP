@@ -1,5 +1,11 @@
 ﻿  Set.cpp
-A:\Ycheba\Ali\OOP\Set\Set\Set.cpp(133,11): error C2955: "MySet": для использования класс шаблон требуется список аргументов шаблон
-A:\Ycheba\Ali\OOP\Set\Set\Set.cpp(11): message : см. объявление "MySet"
-A:\Ycheba\Ali\OOP\Set\Set\Set.cpp(133,16): error C2514: "MySet": невозможно создать шаблон класса.
-A:\Ycheba\Ali\OOP\Set\Set\Set.cpp(11): message : см. объявление "MySet"
+C:\Users\Limbo\OneDrive\Desktop\progr\OOP\Set\Set\Set.cpp(88,15): error C2100: недопустимое косвенное обращение
+C:\Users\Limbo\OneDrive\Desktop\progr\OOP\Set\Set\Set.cpp(76): message : во время компиляции функции-члена класс шаблон "MySet<int> &MySet<int>::operator *(MySet<int> &)"
+C:\Users\Limbo\OneDrive\Desktop\progr\OOP\Set\Set\Set.cpp(203): message : выполняется компиляция ссылки на экземпляр шаблон функции "MySet<int> &MySet<int>::operator *(MySet<int> &)"
+C:\Users\Limbo\OneDrive\Desktop\progr\OOP\Set\Set\Set.cpp(180): message : выполняется компиляция ссылки на экземпляр класс шаблон функции "MySet<int>"
+C:\Users\Limbo\OneDrive\Desktop\progr\OOP\Set\Set\Set.cpp(88,1): error C2440: =: невозможно преобразовать "MySet<int>" в "T *"
+          with
+          [
+              T=int
+          ]
+C:\Users\Limbo\OneDrive\Desktop\progr\OOP\Set\Set\Set.cpp(88,16): message : Для выполнения данного преобразования нет доступного оператора преобразования, определенного пользователем, или вызов оператора невозможен
