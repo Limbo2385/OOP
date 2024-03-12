@@ -1,90 +1,175 @@
 ﻿#include <iostream>
+#include <windows.h>
 #include <string>
 #include <sstream>
-#include <windows.h>
-#include <vector>
-#include <set>
+
 using namespace std;
 
-template <class T>
-class Set {
+template <class T = int>
+class MySet
+{
 private:
-    set<T> mySet;
+    int size = 0;
+    T* Arr = NULL;
 public:
-    Set(set<T> mySet) {
-        this->mySet = mySet;
+
+    MySet(T* p)
+    {
+        Arr = p;
     }
 
-    Set& operator * ( Set& s) 
+    bool check(T item)
     {
-        set<T> mySet3;
-        
-        for (T i : mySet) {
-            for (T c : s.mySet) {
-                if (i == c && mySet3.count(i) == 0) {
-                    mySet3.insert(i);
+        for (size_t i = 0; i < size; i++)
+        {
+            if (Arr[i] == item)
+                return false;
+        }
+
+        return true;
+    }
+
+    void insert(T item)
+    {
+        if (size == 0)
+        {
+            size = 1;
+            Arr = new T[size];
+            Arr[0] = item;
+        }
+        else
+        {
+            if (check(item) == true)
+            {
+                size++;
+                T* Arrey = new T[size];
+
+                for (size_t i = 0; i < size - 1; i++)
+                {
+                    Arrey[i] = Arr[i];
                 }
+
+                Arrey[size - 1] = item;
+
+                delete[] Arr;
+                Arr = Arrey;
             }
         }
-        mySet = mySet3;
-        return *this;
-
     }
 
-    Set& operator- (T s)
+    void erase(T item)
     {
-        mySet.erase(s);
-        return *this;
+        int flag = 0;
+        size--;
+        T* Arrey = new T[size];
+
+        for (size_t i = 0; i < size; i++)
+        {
+            if (Arr[i] == item || flag == 1)
+            {
+                Arrey[i] = Arr[i + 1];
+                flag = 1;
+            }
+            else
+                Arrey[i] = Arr[i];
+        }
+
+        delete[] Arr;
+        Arr = Arrey;
     }
 
-    bool operator < (Set& s)
-    {
-        if (mySet.size() < s.mySet.size()) {
-            return true;
+    int getSize() { return size; }
+
+    bool count(T item) {
+        for (int i = 0; i < size; i++)
+        {
+            if (Arr[i] == item)
+            {
+                return true;
+            }
         }
         return false;
     }
 
+    MySet& operator * (MySet& s)
+    {
+        T* Arr3 = NULL;
+        MySet copy{ Arr3 };
+
+        for (int i = 0; i < size; i++) {
+            for (int c = 0; c < s.getSize(); c++) {
+                if (Arr[i] == s.Arr[c] && copy.count(Arr[i]) == false) {
+                    copy.insert(Arr[i]);
+                }
+            }
+        }
+
+        return copy;
+
+    }
+
+    MySet& operator- (T s)
+    {
+        erase(s);
+        return *this;
+    }
+
+    bool operator < (MySet& s)
+    {
+        if (size < s.getSize())
+            return true;
+        return false;
+    }
+
     void show() {
-        for (T n : mySet)
+        for (int i = 0; i < size; i++)
         {
-            cout << n << " ";
+            cout << Arr[i] << " ";
         }
         cout << endl;
-    }
+    };
 };
 
-class PodobieSeta {
-
-};
-
-int main() {
-
+int main()
+{
     setlocale(LC_ALL, "rus");
+    SetConsoleOutputCP(1251);
+    SetConsoleCP(1251);
 
-    set<int> mySet1;
-    set<int> mySet2;
+    int* p1 = NULL;
+    int* p2 = NULL;
+
+    MySet<int> arr1{ p1 };
+    MySet<int> arr2{ p2 };
+
     for (int i = 0; i < 5; i++) {
-        mySet1.insert(i);
+        arr1.insert(i);
     };
 
-    for (int i = 0; i < 5; i++) {
-        mySet2.insert(i);
+    for (int i = 0; i < 6; i++) {
+        arr2.insert(i);
     }
 
-    Set s(mySet1);
-    Set s1(mySet2);
-    Set s2(mySet1);
-    s = s1 * s2;
-    s = s - (4);
-    s.show();
+    cout << "Множество 1:" << endl;
+    arr1.show();
+    cout << "Множество 2:" << endl;
+    arr2.show();
 
-    if (s < s1) {
-        cout << "текущее множество меньше";
-    }
-    else {
-        cout << "текущее множество больше";
-    }
+    cout << "Множество 1 - '2':" << endl;
+    arr1 = arr1 - (2);
+    arr1.show();
+    cout << "Множество 2 - '4':" << endl;
+    arr2 = arr2 - (4);
+    arr2.show();
 
-    return 0;
-};
+    if (arr1 < arr2)
+        cout << "Текущее множество меньше" << endl;
+    else if (arr1.getSize() == arr2.getSize())
+        cout << "Множества одинаковы" << endl;
+    else
+        cout << "Текущее множество больше" << endl;
+
+    cout << "Множество 1 * 2:" << endl;
+    MySet<int> arr3{ arr1 * arr2 };
+    arr3.show();
+}
