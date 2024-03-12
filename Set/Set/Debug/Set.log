@@ -1,0 +1,5 @@
+﻿  Set.cpp
+A:\Ycheba\Ali\OOP\Set\Set\Set.cpp(133,11): error C2955: "MySet": для использования класс шаблон требуется список аргументов шаблон
+A:\Ycheba\Ali\OOP\Set\Set\Set.cpp(11): message : см. объявление "MySet"
+A:\Ycheba\Ali\OOP\Set\Set\Set.cpp(133,16): error C2514: "MySet": невозможно создать шаблон класса.
+A:\Ycheba\Ali\OOP\Set\Set\Set.cpp(11): message : см. объявление "MySet"
