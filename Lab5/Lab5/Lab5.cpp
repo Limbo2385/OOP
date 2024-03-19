@@ -2,8 +2,74 @@
 #include <windows.h>
 #include <string>
 #include <sstream>
+#include <cmath>
 
 using namespace std;
+
+unsigned int charToInt(char chr)
+{
+    if (chr >= '0' && chr <= '9')
+        return chr - '0';
+    else if (chr >= 'A' && chr <= 'D')
+        return chr - 'A' + 10;
+    else if (chr >= 'a' && chr <= 'd')
+        return chr - 'a' + 10;
+    return -1;
+}
+
+float thirteenToDec(const char* hex, int length, int size)
+{
+    float dec = 0;
+    
+    for (int j = 0, i = size - 1; j < length; ++j, --i) {
+        if (hex[j] == '.')
+        {
+            i++;
+            continue;
+        }
+        dec += charToInt(hex[j]) * pow(13, i);
+    }
+    
+    return dec;
+}
+
+string decToEight(float dec)
+{
+    int eight = 0;
+    float number = 0;
+    float intpart = 0;
+    string strT;
+
+    int num = dec, t = 0, d = 1;
+    while (num)
+    {
+        t += (num % 8) * d;
+        num = num / 8;
+        d = d * 10;
+    }
+    
+    eight = t;
+    number = modf(dec, &intpart);
+    if (number == 0)
+        return to_string(eight);
+    t = 0, d = 1, intpart = 0;
+
+    for (size_t i = 0; i < 3; i++)
+    {
+        number = number * 8;
+        number = modf(number, &intpart);
+        t += intpart * d;
+        d = d * 10;
+    }
+
+    strT = to_string(t);
+    reverse(strT.begin(), strT.end());
+    string result = to_string(eight) + '.' + strT;
+
+    return result;
+}
+
+
 
 template <class T = int>
 class MySet
@@ -149,7 +215,7 @@ int main()
     SetConsoleOutputCP(1251);
     SetConsoleCP(1251);
 
-    int* p1 = NULL;
+    /*int* p1 = NULL;
     int* p2 = NULL;
 
     MySet<int> arr1{ p1 };
@@ -186,5 +252,29 @@ int main()
 
     cout << "Множество 1 * 2:" << endl;
     MySet<int> arr3{ arr1 * arr2 };
-    arr3.show();
+    arr3.show();*/
+
+    string str;
+    cout << "В 13 сс: ";
+    cin >> str;
+    int size;
+    if (str.find(".") == string::npos)
+        size = str.length();
+    else
+        size = str.find(".");
+    try
+    {
+        float dec = thirteenToDec(str.c_str(), str.length(), size);
+        if (dec == 0)
+            throw "Без числа 0";
+
+        cout << "В 10 сс: " << dec << endl;
+        string eight = decToEight(dec);
+        cout << "В 8 сс: " << eight << endl;
+    }
+    catch (const char* message)
+    {
+        cout << message << endl;
+    }
+   
 }

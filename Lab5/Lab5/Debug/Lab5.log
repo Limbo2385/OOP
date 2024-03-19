@@ -1,37 +1,5 @@
 ﻿  Lab5.cpp
-A:\Ycheba\Ali\OOP\Lab5\Lab5\Lab5.cpp(47,38): warning C4018: <: несоответствие типов со знаком и без знака
-A:\Ycheba\Ali\OOP\Lab5\Lab5\Lab5.cpp(33): message : во время компиляции функции-члена класс шаблон "void MySet<int>::insert(T)"
-          with
-          [
-              T=int
-          ]
-A:\Ycheba\Ali\OOP\Lab5\Lab5\Lab5.cpp(159): message : выполняется компиляция ссылки на экземпляр шаблон функции "void MySet<int>::insert(T)"
-          with
-          [
-              T=int
-          ]
-A:\Ycheba\Ali\OOP\Lab5\Lab5\Lab5.cpp(155): message : выполняется компиляция ссылки на экземпляр класс шаблон функции "MySet<int>"
-A:\Ycheba\Ali\OOP\Lab5\Lab5\Lab5.cpp(68,30): warning C4018: <: несоответствие типов со знаком и без знака
-A:\Ycheba\Ali\OOP\Lab5\Lab5\Lab5.cpp(61): message : во время компиляции функции-члена класс шаблон "void MySet<int>::erase(T)"
-          with
-          [
-              T=int
-          ]
-A:\Ycheba\Ali\OOP\Lab5\Lab5\Lab5.cpp(121): message : выполняется компиляция ссылки на экземпляр шаблон функции "void MySet<int>::erase(T)"
-          with
-          [
-              T=int
-          ]
-A:\Ycheba\Ali\OOP\Lab5\Lab5\Lab5.cpp(23,30): warning C4018: <: несоответствие типов со знаком и без знака
-A:\Ycheba\Ali\OOP\Lab5\Lab5\Lab5.cpp(22): message : во время компиляции функции-члена класс шаблон "bool MySet<int>::check(T)"
-          with
-          [
-              T=int
-          ]
-A:\Ycheba\Ali\OOP\Lab5\Lab5\Lab5.cpp(42): message : выполняется компиляция ссылки на экземпляр шаблон функции "bool MySet<int>::check(T)"
-          with
-          [
-              T=int
-          ]
-A:\Ycheba\Ali\OOP\Lab5\Lab5\Lab5.cpp(109): warning C4172: возвращение адреса локальной или временной переменной : copy
+A:\Ycheba\Ali\OOP\Lab5\Lab5\Lab5.cpp(30,46): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+A:\Ycheba\Ali\OOP\Lab5\Lab5\Lab5.cpp(43,13): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+A:\Ycheba\Ali\OOP\Lab5\Lab5\Lab5.cpp(61,25): warning C4244: +=: преобразование "float" в "int", возможна потеря данных
   Lab5.vcxproj -> A:\Ycheba\Ali\OOP\Lab5\Debug\Lab5.exe
