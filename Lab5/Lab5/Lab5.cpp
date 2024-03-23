@@ -1,8 +1,8 @@
-﻿#include <iostream>
-#include <windows.h>
+﻿#include <windows.h>
 #include <string>
 #include <sstream>
 #include <cmath>
+#include <iostream>
 
 using namespace std;
 
@@ -10,26 +10,30 @@ unsigned int charToInt(char chr)
 {
     if (chr >= '0' && chr <= '9')
         return chr - '0';
-    else if (chr >= 'A' && chr <= 'D')
+    else if (chr >= 'A' && chr <= 'C')
         return chr - 'A' + 10;
-    else if (chr >= 'a' && chr <= 'd')
+    else if (chr >= 'a' && chr <= 'c')
         return chr - 'a' + 10;
-    return -1;
+    throw "Это не тринадцатеричное число!";
 }
 
 float thirteenToDec(const char* hex, int length, int size)
 {
+    int count = 0;
     float dec = 0;
-    
+
     for (int j = 0, i = size - 1; j < length; ++j, --i) {
-        if (hex[j] == '.')
+        if (hex[j] == '.' || hex[j] == ',')
         {
             i++;
+            count++;
+            if (count >= 2)
+                throw "Число введено не верно!";
             continue;
         }
         dec += charToInt(hex[j]) * pow(13, i);
     }
-    
+
     return dec;
 }
 
@@ -37,7 +41,9 @@ string decToEight(float dec)
 {
     int eight = 0;
     float number = 0;
+    float number2 = 0;
     float intpart = 0;
+    float intpart2 = 0;
     string strT;
 
     int num = dec, t = 0, d = 1;
@@ -47,7 +53,7 @@ string decToEight(float dec)
         num = num / 8;
         d = d * 10;
     }
-    
+
     eight = t;
     number = modf(dec, &intpart);
     if (number == 0)
@@ -58,6 +64,13 @@ string decToEight(float dec)
     {
         number = number * 8;
         number = modf(number, &intpart);
+        if (i == 2)
+        {
+            number2 = number * 8;
+            number2 = modf(number2, &intpart2);
+            if (intpart2 >= 5)
+                intpart++;
+        }
         t += intpart * d;
         d = d * 10;
     }
@@ -65,6 +78,7 @@ string decToEight(float dec)
     strT = to_string(t);
     reverse(strT.begin(), strT.end());
     string result = to_string(eight) + '.' + strT;
+
 
     return result;
 }
@@ -173,23 +187,16 @@ public:
         }
 
         return copy;
-
     }
 
     MySet& operator- (T s)
     {
-        try
-        {
-            if (size == 0)
-                return *this;
-            if (s == 0)
-                throw "Число ноль нельзя удалить";
-            erase(s);
-        }
-        catch (const char* error_message)
-        {
-            cout << error_message << endl;
-        }
+        if (size == 0)
+            return *this;
+        if (s == 0)
+            throw "Число ноль нельзя удалить";
+        erase(s);
+
         return *this;
     }
 
@@ -211,63 +218,65 @@ public:
 
 int main()
 {
-    setlocale(LC_ALL, "rus");
-    SetConsoleOutputCP(1251);
-    SetConsoleCP(1251);
-
-    /*int* p1 = NULL;
-    int* p2 = NULL;
-
-    MySet<int> arr1{ p1 };
-    MySet<int> arr2{ p2 };
-
-    for (int i = 0; i < 5; i++) {
-        arr1.insert(i);
-    };
-
-    for (int i = 0; i < 6; i++) {
-        arr2.insert(i);
-    }
-
-    cout << "Множество 1:" << endl;
-    arr1.show();
-    cout << "Множество 2:" << endl;
-    arr2.show();
-    cout << "Множество 1 - '2':" << endl;
-    arr1 = arr1 - (2);
-    arr1.show();
-    cout << "Множество 1 - '0':" << endl;
-    arr1 = arr1 - (0);
-    arr1.show();
-    cout << "Множество 2 - '4':" << endl;
-    arr2 = arr2 - (4);
-    arr2.show();
-
-    if (arr1 < arr2)
-        cout << "Текущее множество меньше" << endl;
-    else if (arr1.getSize() == arr2.getSize())
-        cout << "Множества одинаковы" << endl;
-    else
-        cout << "Текущее множество больше" << endl;
-
-    cout << "Множество 1 * 2:" << endl;
-    MySet<int> arr3{ arr1 * arr2 };
-    arr3.show();*/
-
-    string str;
-    cout << "В 13 сс: ";
-    cin >> str;
-    int size;
-    if (str.find(".") == string::npos)
-        size = str.length();
-    else
-        size = str.find(".");
     try
     {
-        float dec = thirteenToDec(str.c_str(), str.length(), size);
-        if (dec == 0)
-            throw "Без числа 0";
+        setlocale(LC_ALL, "rus");
+        SetConsoleOutputCP(1251);
+        SetConsoleCP(1251);
 
+        int* p1 = NULL;
+        int* p2 = NULL;
+
+        MySet<int> arr1{ p1 };
+        MySet<int> arr2{ p2 };
+
+        for (int i = 0; i < 5; i++) {
+            arr1.insert(i);
+        };
+
+        for (int i = 0; i < 6; i++) {
+            arr2.insert(i);
+        }
+
+        cout << "Множество 1:" << endl;
+        arr1.show();
+        cout << "Множество 2:" << endl;
+        arr2.show();
+        cout << "Множество 1 - '2':" << endl;
+        arr1 = arr1 - (2);
+        arr1.show();
+        /*cout << "Множество 1 - '0':" << endl;
+        arr1 = arr1 - (0);
+        arr1.show();*/
+        cout << "Множество 2 - '4':" << endl;
+        arr2 = arr2 - (4);
+        arr2.show();
+
+        if (arr1 < arr2)
+            cout << "Текущее множество меньше" << endl;
+        else if (arr1.getSize() == arr2.getSize())
+            cout << "Множества одинаковы" << endl;
+        else
+            cout << "Текущее множество больше" << endl;
+
+        cout << "Множество 1 * 2:" << endl;
+        MySet<int> arr3{ arr1 * arr2 };
+        arr3.show();
+
+        string str;
+        cout << "В 13 сс: ";
+        cin >> str;
+        int size;
+        if (str.find(".") == string::npos)
+        {
+            if (str.find(",") == string::npos)
+                size = str.length();
+            else
+                size = str.find(",");
+        }
+        else
+            size = str.find(".");
+        float dec = thirteenToDec(str.c_str(), str.length(), size);
         cout << "В 10 сс: " << dec << endl;
         string eight = decToEight(dec);
         cout << "В 8 сс: " << eight << endl;
@@ -276,5 +285,5 @@ int main()
     {
         cout << message << endl;
     }
-   
+
 }
